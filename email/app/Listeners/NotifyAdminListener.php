@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Listeners;
-ueue;
+
 use Illuminate\Queue\InteractsWithQ
 use Illuminate\Mail\Message;
 use Illuminate\Contracts\Queue\ShouldQueue;
