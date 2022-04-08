@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderCompletedEvent;
-use App\Http\Resources\OrderResource;
-use App\Models\Link;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Product;
-use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
+use Cartalyst\Stripe\Stripe;
+use App\Models\Product;
+use App\Models\OrderItem;
+use App\Models\Order;
+use App\Models\Link;
+use App\Http\Resources\OrderResource;
+use App\Events\OrderCompletedEvent;
 
 class OrderController extends Controller
 {
@@ -104,7 +104,7 @@ class OrderController extends Controller
         $order->complete = 1;
         $order->save();
 
-        event(new OrderCompletedEvent($order));
+        // event(new OrderCompletedEvent($order));
 
         return [
             'message' => 'success'
