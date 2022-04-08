@@ -30,9 +30,11 @@ class ConsumeCommand extends Command
         $conf = new \RdKafka\Conf();
 
 
-        $conf->set('bootstrap.servers', 'pkc-w12qj.ap-southeast-1.aws.confluent.cloud:9092');
+        $conf->set('bootstrap.servers', '');
         $conf->set('security.protocol', 'SASL_SSL');
         $conf->set('sasl.mechanism', 'PLAIN');
+        $conf->set('sasl.username', '');
+        $conf->set('sasl.password', '');
         $conf->set('group.id', 'myGroup');
         $conf->set('auto.offset.reset', 'earliest');
 
