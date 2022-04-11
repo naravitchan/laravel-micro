@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Link;
 use App\Http\Resources\OrderResource;
 use App\Events\OrderCompletedEvent;
+use App\Jobs\OrderCompleted;
 
 class OrderController extends Controller
 {
@@ -104,7 +105,9 @@ class OrderController extends Controller
         $order->complete = 1;
         $order->save();
 
-        // event(new OrderCompletedEvent($order));
+        // $arr = $order->toArray();
+        // $arr['ambassador_revenue'] = $order->ambassador_revenue;
+        // OrderCompleted::dispatch($arr);
 
         return [
             'message' => 'success'

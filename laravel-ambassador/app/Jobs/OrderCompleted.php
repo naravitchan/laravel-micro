@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Message;
 
 class OrderCompleted implements ShouldQueue
 {
@@ -33,5 +34,16 @@ class OrderCompleted implements ShouldQueue
     public function handle()
     {
         var_dump('message from laravel ambassador app');
+
+        var_dump("sending emails");
+        \Mail::send('admin', ['order' => $this->data], function (Message $message) {
+            $message->subject('An Order has been completed');
+            $message->to('admin@admin.com');
+        });
+        \Mail::send('ambassador', ['order' => $this->data], function (Message $message) {
+            $message->subject('An Order has been completed');
+            $message->to($this->data['ambassador_email']);
+        });
+        var_dump("emails sent");
     }
 }
