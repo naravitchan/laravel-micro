@@ -4,4 +4,4 @@ services:
         build: .
         volumes:
             - .:/app
-        command: 'php artisan serve --port=9090'
+        command: 'php artisan queue:work'

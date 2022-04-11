@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Mail\Message;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
 
 class OrderCompleted implements ShouldQueue
 {
@@ -33,6 +33,16 @@ class OrderCompleted implements ShouldQueue
     public function handle()
     {
         var_dump('hello from email microservice');
-        var_dump($this->data);
+        // var_dump($this->data);
+        var_dump("sending emails");
+        \Mail::send('admin', ['order' => $this->data], function (Message $message) {
+            $message->subject('An Order has been completed');
+            $message->to('admin@admin.com');
+        });
+        \Mail::send('ambassador', ['order' => $this->data], function (Message $message) {
+            $message->subject('An Order has been completed');
+            $message->to($this->data['ambassador_email']);
+        });
+        var_dump("emails sent");
     }
 }
