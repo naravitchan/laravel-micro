@@ -42,6 +42,6 @@ class ProduceCommand extends Command
         $order = Order::find(1);
         $arr = $order->toArray();
         $arr['ambassador_revenue'] = $order->ambassador_revenue;
-        OrderCompleted::dispatch($arr);
+        OrderCompleted::dispatch($arr)->onQueue('email_topic');
     }
 }
