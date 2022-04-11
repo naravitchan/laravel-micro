@@ -29,11 +29,11 @@ class ConsumeCommand extends Command
     {
         $conf = new \RdKafka\Conf();
 
-        $conf->set('bootstrap.servers', env('KAFKA_BOOTSTRAP'));
+        $conf->set('bootstrap.servers', env('BOOTSTRAP_SERVERS'));
         $conf->set('security.protocol', 'SASL_SSL');
         $conf->set('sasl.mechanism', 'PLAIN');
-        $conf->set('sasl.username', env('KAFKA_USERNAME'));
-        $conf->set('sasl.password', env('KAFKA_PASSWORD'));
+        $conf->set('sasl.username', env('SASL_USERNAME'));
+        $conf->set('sasl.password', env('SASL_PASSWORD'));
         $conf->set('group.id', 'myGroup2');
         $conf->set('auto.offset.reset', 'earliest');
 
