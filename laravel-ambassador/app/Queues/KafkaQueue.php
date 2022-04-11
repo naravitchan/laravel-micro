@@ -23,7 +23,7 @@ class KafkaQueue extends Queue implements QueueContract
     public function push($job, $data = "", $queue = null)
     {
         $topic = $this->producer->newTopic($queue ?? env('KAFKA_QUEUE'));
-        $topic->produce(RD_KAFKA_PARTITION_UA, 0, "hello from the other job");
+        $topic->produce(RD_KAFKA_PARTITION_UA, 0, serialize($job));
         $this->producer->flush(1000);
     }
 
@@ -44,9 +44,9 @@ class KafkaQueue extends Queue implements QueueContract
 
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
-                    var_dump($message->payload);
-                    // $job = unserialize($message->payload);
-                    // $job->handle();
+                    // var_dump($message->payload);
+                    $job = unserialize($message->payload);
+                    $job->handle();
                     break;
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
                     var_dump("No more messages; will wait for more\n");
