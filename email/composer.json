@@ -4,7 +4,14 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/naravitchan/kafka-queue.git"
+        }
+    ],
     "require": {
+        "naravitchan/kafka-queue": "dev-main",
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
@@ -23,7 +30,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Kafka\\": "vendor/naravitchan/kafka-queue/src/"
         }
     },
     "autoload-dev": {
